@@ -1,0 +1,42 @@
+<style>
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    margin:1rem auto;
+    max-width: 600px;
+}  
+</style>
+
+<!-- Toolbar -->
+<h1 style="text-align:center">
+  Welcome to {{ nameApp }}
+</h1>
+<div class="contenedor">
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="Idclient" type="number" placeholder="Enter Employee ID">
+  </mat-form-field>
+  
+  <button mat-raised-button color="primary" (click)="Consultar()">Consult</button>
+  <p>{{result}}</p>
+  
+</div>
+<div *ngIf="employ!=null; else espera" class="contenedor">
+  <table border="1">
+    <tr>
+      <td>Id Employ</td>
+      <td>Name</td>
+      <td>Salary</td>
+      <td>Anual Salary</td>
+      <td>Age</td>
+    </tr>
+    <tr *ngFor="let art of employ">
+      <td>{{art.Id}}</td>
+      <td>{{art.employee_name}}</td>
+      <td>{{art.employee_salary}}</td>
+      <td>{{art.Employee_anual_salary}}</td>
+      <td>{{art.employee_age}}</td>
+    </tr>
+  </table>
+</div>
+<ng-template #espera>Esperando datos...</ng-template>
