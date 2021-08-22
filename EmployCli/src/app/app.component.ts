@@ -43,24 +43,15 @@ export class AppComponent {
   }
 
   ConsultEmployById() {
-    this.http.post<employ>("http://localhost/WSTestThalesYonyV/api/Employ/EmployById?id=" + this.Idclient.toString(), { title: 'POS' })
+    this.http.get<any>("http://localhost/WSTestThalesYonyV/api/Employ/EmployById?id=" + this.Idclient.toString())
       .subscribe(
         result => {
-          this.employ = Array.of(this.result);
+          this.employ = Array.of(result);
+          console.log(this.employ)
         },
         error => {
           console.log('problemas');
         }
       );
-  }
-
-  
-}
-interface employ {
-  Id : number,
-  employee_name : string
-  employee_salary: number,
-  Employee_anual_salary : number,
-  employee_age : number,
-  profile_image :string 
+  } 
 }
