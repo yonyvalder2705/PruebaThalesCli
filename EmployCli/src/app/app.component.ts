@@ -14,6 +14,7 @@ export class AppComponent {
   Idclient=0;
   result="";
   employ: any = null;
+  IdCliResponse = 0;
 
   constructor(private http: HttpClient) { }
 
@@ -43,15 +44,29 @@ export class AppComponent {
   }
 
   ConsultEmployById() {
-    this.http.get<any>("http://localhost/WSTestThalesYonyV/api/Employ/EmployById?id=" + this.Idclient.toString())
+    this.http.post<Employ>("http://localhost/WSTestThalesYonyV/api/Employ/EmployById?id=" + this.Idclient.toString(), "title")
       .subscribe(
         result => {
           this.employ = Array.of(result);
-          console.log(this.employ)
+          this.IdCliResponse = result.Id;
+          if(this.IdCliResponse == 0)
+          {
+            this.result = "El Empleado no se encontro";
+            this.employ = null;
+          }
         },
         error => {
           console.log('problemas');
         }
       );
-  } 
+  }
 }
+interface Employ{
+  Id: number;
+  employee_name: string;
+  employee_salary : number;
+  Employee_anual_salary : number;
+  employee_age: number;
+  profile_image : string;
+}
+
